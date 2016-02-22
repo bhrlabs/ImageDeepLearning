@@ -7,13 +7,17 @@ function SVMStruct = learnSVMClassifier()
     folderParking = 'C:/Bharat/Masters Material/GIT Repo/ImageDeepLearning/ImageDemo/Images/parkinglot/';
     folderRiver = 'C:/Bharat/Masters Material/GIT Repo/ImageDeepLearning/ImageDemo/Images/river/';
     folderIntersection = 'C:/Bharat/Masters Material/GIT Repo/ImageDeepLearning/ImageDemo/Images/intersection/';
+    folderResi = 'C:/Bharat/Masters Material/GIT Repo/ImageDeepLearning/ImageDemo/Images/denseresidential/';
+    
     imagefilesForest = dir([folderForest '*.tif']);
     imagefilesAgri = dir([folderAgri '*.tif']);
     imagefilesTennis = dir([folderTennis '*.tif']);
     imagefilesParking = dir([folderParking '*.tif']);
     imagefilesRiver = dir([folderRiver '*.tif']);
     imagefilesIntersection = dir([folderIntersection '*.tif']);
-    nfiles = 540; 
+    imagefilesResi = dir([folderResi '*.tif']);
+    
+    nfiles = 630; 
 
     i = 1;
     for j = 1:90
@@ -23,6 +27,7 @@ function SVMStruct = learnSVMClassifier()
         images{i} = im2double(images{i});
         images{i} = rgb2gray(images{i});
         images{i} = imresize(images{i},[200 200]);
+        images{i} = edge(images{i},'Canny');
         images{i} = reshape(images{i}', 1, size(images{i},1)*size(images{i},2));
         i = i + 1;
     end
@@ -34,6 +39,7 @@ function SVMStruct = learnSVMClassifier()
         images{i} = im2double(images{i});
         images{i} = rgb2gray(images{i});
         images{i} = imresize(images{i},[200 200]);
+        images{i} = edge(images{i},'Canny');
         images{i} = reshape(images{i}', 1, size(images{i},1)*size(images{i},2));
         i = i + 1;
     end
@@ -45,6 +51,7 @@ function SVMStruct = learnSVMClassifier()
         images{i} = im2double(images{i});
         images{i} = rgb2gray(images{i});
         images{i} = imresize(images{i},[200 200]);
+        images{i} = edge(images{i},'Canny');
         images{i} = reshape(images{i}', 1, size(images{i},1)*size(images{i},2));
         i = i + 1;
     end
@@ -56,6 +63,7 @@ function SVMStruct = learnSVMClassifier()
         images{i} = im2double(images{i});
         images{i} = rgb2gray(images{i});
         images{i} = imresize(images{i},[200 200]);
+        images{i} = edge(images{i},'Canny');
         images{i} = reshape(images{i}', 1, size(images{i},1)*size(images{i},2));
         i = i + 1;
     end
@@ -67,6 +75,7 @@ function SVMStruct = learnSVMClassifier()
         images{i} = im2double(images{i});
         images{i} = rgb2gray(images{i});
         images{i} = imresize(images{i},[200 200]);
+        images{i} = edge(images{i},'Canny');
         images{i} = reshape(images{i}', 1, size(images{i},1)*size(images{i},2));
         i = i + 1;
     end
@@ -78,6 +87,19 @@ function SVMStruct = learnSVMClassifier()
         images{i} = im2double(images{i});
         images{i} = rgb2gray(images{i});
         images{i} = imresize(images{i},[200 200]);
+        images{i} = edge(images{i},'Canny');
+        images{i} = reshape(images{i}', 1, size(images{i},1)*size(images{i},2));
+        i = i + 1;
+    end
+    
+    for j = 1:90
+        currentfilename = imagefilesResi(j).name;
+        currentimage = imread([folderResi currentfilename]);
+        images{i} = currentimage;
+        images{i} = im2double(images{i});
+        images{i} = rgb2gray(images{i});
+        images{i} = imresize(images{i},[200 200]);
+        images{i} = edge(images{i},'Canny');
         images{i} = reshape(images{i}', 1, size(images{i},1)*size(images{i},2));
         i = i + 1;
     end
@@ -89,7 +111,7 @@ function SVMStruct = learnSVMClassifier()
     end
 
     a = ones(1, 90);
-    b = ones(1, 450);
+    b = ones(1, 540);
     b = b * -1;
     class = [a b];
     SVMStruct = svmtrain (trainData, class);

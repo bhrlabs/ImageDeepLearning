@@ -27,50 +27,51 @@ fprintf('Start: Training Classifier ... \n');
 SVMStruct = learnSVMClassifier();
 fprintf('Finish: Training Classifier\n');
 
+fprintf('Sending Segments to classifier ... \n');
+
 inputImg = imread('beach42.tif');
 inputImg = inputImg(:,:,1:3);
 inputImg = im2double(inputImg);
 inputImg = rgb2gray(inputImg);
 inputImg = imresize(inputImg, [200 200]);
+inputImg = edge(inputImg,'Canny');
 inputImg = reshape (inputImg', 1, size(inputImg,1)*size(inputImg,2));
-result = svmclassify(SVMStruct, inputImg);
-
-result
+result(1) = svmclassify(SVMStruct, inputImg);
 
 inputImg = quads(:,:,1);
 inputImg = im2double(inputImg);
 inputImg = imresize(inputImg, [200 200]);
+inputImg = edge(inputImg,'Canny');
 inputImg = reshape (inputImg', 1, size(inputImg,1)*size(inputImg,2));
-result = svmclassify(SVMStruct, inputImg);
+result(2) = svmclassify(SVMStruct, inputImg);
 
-result
 inputImg = quads(:,:,2);
 inputImg = im2double(inputImg);
 inputImg = imresize(inputImg, [200 200]);
+inputImg = edge(inputImg,'Canny');
 inputImg = reshape (inputImg', 1, size(inputImg,1)*size(inputImg,2));
-result = svmclassify(SVMStruct, inputImg);
+result(3) = svmclassify(SVMStruct, inputImg);
 
-result
 inputImg = quads(:,:,3);
 inputImg = im2double(inputImg);
 inputImg = imresize(inputImg, [200 200]);
+inputImg = edge(inputImg,'Canny');
 inputImg = reshape (inputImg', 1, size(inputImg,1)*size(inputImg,2));
-result = svmclassify(SVMStruct, inputImg);
+result(4) = svmclassify(SVMStruct, inputImg);
 
-result
 inputImg = quads(:,:,4);
 inputImg = im2double(inputImg);
 inputImg = imresize(inputImg, [200 200]);
+inputImg = edge(inputImg,'Canny');
 inputImg = reshape (inputImg', 1, size(inputImg,1)*size(inputImg,2));
-result = svmclassify(SVMStruct, inputImg);
+result(5) = svmclassify(SVMStruct, inputImg);
 
-result
 inputImg = quads(:,:,5);
 inputImg = im2double(inputImg);
 inputImg = imresize(inputImg, [200 200]);
+inputImg = edge(inputImg,'Canny');
 inputImg = reshape (inputImg', 1, size(inputImg,1)*size(inputImg,2));
-result = svmclassify(SVMStruct, inputImg);
+result(6) = svmclassify(SVMStruct, inputImg);
 
-result
+result(2:6)
 
-fprintf('Sending Segments to classifier ... \n');

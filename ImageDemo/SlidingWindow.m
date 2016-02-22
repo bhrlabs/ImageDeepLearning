@@ -1,4 +1,4 @@
-function [ans, value] =  slideOverImages(image)
+
 %The function slides over the image using a window of a fixed aspect
 %ratio. Checks for a pattern match with each image to produce a PDF.help
 % Author: Bharat Singh
